@@ -78,13 +78,14 @@ public class Juego {
                                 Ficha ficha = monton.sacarFicha();
                                 turnoActual.getAtril().agregarFicha(ficha);
                                 System.out.println("Ficha sacada: " + ficha.getLetra());
+                                monton.mostrarCantidadMonton();
                                 turnoActual.getAtril().mostrarAtril();
                                 turnoActual = siguienteTurno(turnoActual);
                                 break;
                             case 2:
                                 tablero.mostrarTablero();
                                 turnoActual.getAtril().mostrarAtril();
-                                System.out.println("\u001B[33m Ingrese la posicion en el atril de la ficha que desea colocar (1 en adelante): ");
+                                System.out.println("\u001B[33m Ingrese la posicion en el atril de la ficha que desea colocar (pos. de 1 en adelante): ");
                                 Integer posicion = scanner.nextInt();
                                 Ficha fichaColocar = turnoActual.getAtril().getFichas().get(posicion - 1);
                                 System.out.println("Ingrese la posicion X en la que desea colocar la ficha: ");
@@ -144,11 +145,16 @@ public class Juego {
                                     Integer puntosPalabra = palabraFormada.calcularPuntajePalabra(tablero);
                                     System.out.println("Puntos de la palabra: " + puntosPalabra);
                                     palabraFormada.setPuntaje(puntosPalabra);
+                                    turnoActual.setPuntaje(palabraFormada.getPuntaje());
+                                    System.out.println("\u001B[32m El puntaje de " + turnoActual.getNombre() + " es ahora de: " + turnoActual.getPuntaje());
+                                    System.out.print("\u001B[0m");
                                 } else {
                                     System.out.println("\u001B[31m No se formo ninguna palabra, por lo que su puntaje del turno es 0");
                                 }
                                 turnoActual = siguienteTurno(turnoActual);
+                                System.out.print("\u001B[0m");
                                 System.out.println("Turno terminado");
+                                monton.mostrarCantidadMonton();
                                 break;
                             case 5:
                                 terminado = true;
@@ -157,6 +163,8 @@ public class Juego {
                                 System.out.println("JUEGO TERMINADO");
                                 System.out.println("=======================");
                                 System.out.print("\u001B[0m");
+                                mostrarGanador();
+                                System.out.println("¡Gracias por jugar!");
                                 break;
                             default:
                                 System.out.println("\u001B[31m" + "Opcion incorrecta");
@@ -172,6 +180,8 @@ public class Juego {
                     System.out.println("JUEGO TERMINADO");
                     System.out.println("=======================");
                     System.out.print("\u001B[0m");
+                    mostrarGanador();
+                    System.out.println("¡Gracias por jugar!");
                     break;
                 default:
                     System.out.println("\u001B[31m" + "Opcion incorrecta");
@@ -225,5 +235,25 @@ public class Juego {
             }
         }
         return siguienteTurno;
+    }
+
+    // AGREGAR EMPATE
+    public static Jugador calcularGanador() {
+        Jugador ganador = null;
+        for (Jugador jugador : jugadores) {
+            if (ganador == null) {
+                ganador = jugador;
+            } else {
+                if (jugador.getPuntaje() > ganador.getPuntaje()) {
+                    ganador = jugador;
+                }
+            }
+        }
+        return ganador;
+    }
+
+    public static void mostrarGanador() {
+        Jugador ganador = calcularGanador();
+        System.out.println("El ganador es " + ganador.getNombre() + " con un puntaje de: " + ganador.getPuntaje());
     }
 }

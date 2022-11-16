@@ -24,11 +24,12 @@ public class Ficha {
         this.valor = valor;
     }
 
+    // HACER QUE DE CADA LETRA HAYA UNA DETERMINADA CANTIDAD PERO QUE LE GENERACION DE LA LETRA SIGA SIENDO "ALEATORIA"
     public char generarLetraAleatoria() {
-        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        int n = alphabet.length();
+        String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        int n = alfabeto.length();
         int r = (int) (n * Math.random());
-        return alphabet.charAt(r);
+        return alfabeto.charAt(r);
     }
 
     public Integer generarValorAleatorio() {

@@ -33,9 +33,16 @@ public class Monton {
     }
 
     public Ficha sacarFicha() {
-        Ficha ficha = this.fichas.get(0);
-        this.fichas.remove(0);
+        Integer posicionAleatoria = this.generarPosicionAleatoria();
+        Ficha ficha = this.fichas.get(posicionAleatoria);
+        this.fichas.remove(ficha);
         return ficha;
+    }
+
+    public Integer generarPosicionAleatoria() {
+        int n = this.fichas.size();
+        int r = (int) (n * Math.random());
+        return r;
     }
 
     public ArrayList<Ficha> getFichas() {

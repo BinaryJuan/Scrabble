@@ -107,11 +107,19 @@ public class Palabra {
         String palabra = "";
         if (this.esHorizontal()) {
             for (int i = this.comienzoX; i <= this.finX; i++) {
-                palabra += tablero.getCasillas()[i][this.comienzoY].getFicha().getLetra();
+                if (!tablero.getCasillas()[i][this.comienzoY].estaVacia()) {
+                    palabra += tablero.getCasillas()[i][this.comienzoY].getFicha().getLetra();
+                } else {
+                    palabra = "Palabra invalida";
+                }
             }
         } else {
             for (int i = this.comienzoY; i <= this.finY; i++) {
-                palabra += tablero.getCasillas()[this.comienzoX][i].getFicha().getLetra();
+                if (!tablero.getCasillas()[this.comienzoX][i].estaVacia()) {
+                    palabra += tablero.getCasillas()[this.comienzoX][i].getFicha().getLetra();
+                } else {
+                    palabra = "Palabra invalida";
+                }
             }
         }
         return palabra;
@@ -127,27 +135,79 @@ public class Palabra {
                 return valorFicha * 2;
             case AZUL:
                 return valorFicha * 3;
-            case ROSA:
-                return valorFicha * 4;
-            case ROJO:
-                return valorFicha * 4;
             default:
                 return valorFicha;
         }
     }
 
-    public Integer calcularPuntajePalabra(Tablero tablero) {
-        Integer puntajePalabra = 0;
+    public Boolean esLaPalabraMultiplicada(Tablero tablero) {
         if (this.esHorizontal()) {
             for (int i = this.comienzoX; i <= this.finX; i++) {
-                puntajePalabra += this.devolverValorSegunCasilla(tablero.getCasillas()[i][this.comienzoY]);
+                if (tablero.getCasillas()[i][this.comienzoY].getColor() == Color.ROSA || tablero.getCasillas()[i][this.comienzoY].getColor() == Color.ROJO) {
+                    return true;
+                }
             }
         } else {
             for (int i = this.comienzoY; i <= this.finY; i++) {
-                puntajePalabra += this.devolverValorSegunCasilla(tablero.getCasillas()[this.comienzoX][i]);
+                if (tablero.getCasillas()[this.comienzoX][i].getColor() == Color.ROSA || tablero.getCasillas()[this.comienzoX][i].getColor() == Color.ROJO) {
+                    return true;
+                }
             }
+        }
+        return false;
+    }
+
+    public Color colorPalabraMultiplicada(Tablero tablero) {
+        if (this.esHorizontal()) {
+            for (int i = this.comienzoX; i <= this.finX; i++) {
+                if (tablero.getCasillas()[i][this.comienzoY].getColor() == Color.ROSA || tablero.getCasillas()[i][this.comienzoY].getColor() == Color.ROJO) {
+                    return tablero.getCasillas()[i][this.comienzoY].getColor();
+                }
+            }
+        } else {
+            for (int i = this.comienzoY; i <= this.finY; i++) {
+                if (tablero.getCasillas()[this.comienzoX][i].getColor() == Color.ROSA || tablero.getCasillas()[this.comienzoX][i].getColor() == Color.ROJO) {
+                    return tablero.getCasillas()[this.comienzoX][i].getColor();
+                }
+            }
+        }
+        return Color.NORMAL;
+    }
+
+    public Integer calcularPuntajePalabra(Tablero tablero) {
+        Integer puntajePalabra = 0;
+        Boolean palabraValida = true;
+        if (this.esHorizontal()) {
+            for (int i = this.comienzoX; i <= this.finX; i++) {
+                if (!tablero.getCasillas()[i][this.comienzoY].estaVacia()) {
+                    puntajePalabra += this.devolverValorSegunCasilla(tablero.getCasillas()[i][this.comienzoY]);
+                } else {
+                    palabraValida = false;
+                }
+            }
+        } else {
+            for (int i = this.comienzoY; i <= this.finY; i++) {
+                if (!tablero.getCasillas()[this.comienzoX][i].estaVacia()) {
+                    puntajePalabra += this.devolverValorSegunCasilla(tablero.getCasillas()[this.comienzoX][i]);
+                } else {
+                    palabraValida = false;
+                }
+            }
+        }
+
+        if (palabraValida) {
+            if (this.esLaPalabraMultiplicada(tablero)) {
+                Color colorEncontrado = this.colorPalabraMultiplicada(tablero);
+                if (colorEncontrado == Color.ROSA) {
+                    puntajePalabra *= 2;
+                } else {
+                    puntajePalabra *= 3;
+                }
+            }
+        } else {
+            System.out.println("La palabra no es valida");
+            puntajePalabra = 0;
         }
         return puntajePalabra;
     }
-
 }

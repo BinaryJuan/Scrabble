@@ -33,7 +33,7 @@ public class Jugador {
     }
 
     public void setPuntaje(Integer puntaje) {
-        this.puntaje = puntaje;
+        this.puntaje += puntaje;
     }
 
     public Atril getAtril() {
