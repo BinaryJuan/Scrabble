@@ -44,10 +44,6 @@ public class Jugador {
         this.atril = atril;
     }
 
-    public void mostrarAtril() {
-        this.atril.mostrarAtril();
-    }
-
     public void agregarPuntaje(Integer puntaje) {
         this.puntaje += puntaje;
     }
@@ -62,13 +58,6 @@ public class Jugador {
 
     public void mostrarPuntaje() {
         System.out.println(this.puntaje);
-    }
-
-    public void mostrarJugador() {
-        System.out.println("Nombre: " + this.nombre);
-        System.out.println("Puntaje: " + this.puntaje);
-        System.out.println("Atril: ");
-        this.atril.mostrarAtril();
     }
 
     public char tomarFichaTurno(Monton monton) {

@@ -1,19 +1,53 @@
 package ar.scrabble.unlu;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Diccionario {
-    private ArrayList<Palabra> palabras;
+    private String[] palabras;
 
     public Diccionario() {
-        this.palabras = new ArrayList<Palabra>();
+        this.palabras = null;
     }
 
-    public Boolean existePalabra(String palabra) {
-        for (Palabra palabraDiccionario : this.palabras) {
-            if (palabraDiccionario.getPalabra().equals(palabra)) {
-                return true;
+    public void agregarPalabra(String palabra) {
+        if (this.palabras == null) {
+            this.palabras = new String[1];
+            this.palabras[0] = palabra;
+        } else {
+            String[] palabrasAux = new String[this.palabras.length + 1];
+            for (int i = 0; i < this.palabras.length; i++) {
+                palabrasAux[i] = this.palabras[i];
+            }
+            palabrasAux[palabrasAux.length - 1] = palabra;
+            this.palabras = palabrasAux;
+        }
+    }
+
+    public void cargarDiccionario() {
+        try {
+            File archivo = new File("assets/palabras.txt");
+            Scanner sc = new Scanner(archivo);
+            while (sc.hasNextLine()) {
+                String palabra = sc.nextLine();
+                this.agregarPalabra(palabra);
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Ocurrió un error al cargar el diccionario");
+            e.printStackTrace();
+        }
+    }
+
+    public boolean buscarPalabra(String palabra) { // usar while
+        palabra = palabra.toLowerCase();
+        boolean existe = false;
+        for (int i = 0; i < this.palabras.length; i++) {
+            if (this.palabras[i].equals(palabra)) {
+                existe = true;
             }
         }
-        return false;
+        return existe;
     }
+
 }

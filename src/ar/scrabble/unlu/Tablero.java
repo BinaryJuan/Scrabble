@@ -1,8 +1,6 @@
 package ar.scrabble.unlu;
 
 public class Tablero {
-    // private final Integer DIMENSIONX = 15;
-    // private final Integer DIMENSIONY = 15;
     private Casilla[][] casillas;
 
     public Tablero() {
@@ -31,25 +29,16 @@ public class Tablero {
     }
 
     // public void mostrarTablero() {
+    //     String tabla = "\u001B[33m       Y0   Y1   Y2   Y3   Y4   Y5   Y6   Y7   Y8   Y9   Y10  Y11  Y12  Y13  Y14  \u001B[0m";
     //     for (int i = 0; i < 15; i++) {
+    //         tabla += "\n \u001B[33m X" + String.format("%1$2s", i) + " \u001B[0m";
     //         for (int j = 0; j < 15; j++) {
-    //             this.casillas[i][j].mostrarCasillaConValorYLetra();
+    //             tabla += this.casillas[i][j].devolverCasillaConValorYLetra();
     //         }
-    //         System.out.println();
     //     }
+    //     System.out.println(tabla);
+    //     System.out.print("\u001B[0m");
     // }
-
-    public void mostrarTablero() {
-        String tabla = "\u001B[33m       Y0   Y1   Y2   Y3   Y4   Y5   Y6   Y7   Y8   Y9   Y10  Y11  Y12  Y13  Y14  \u001B[0m";
-        for (int i = 0; i < 15; i++) {
-            tabla += "\n \u001B[33m X" + String.format("%1$2s", i) + " \u001B[0m";
-            for (int j = 0; j < 15; j++) {
-                tabla += this.casillas[i][j].devolverCasillaConValorYLetra();
-            }
-        }
-        System.out.println(tabla);
-        System.out.print("\u001B[0m");
-    }
 
     public Casilla[][] getCasillas() {
         return casillas;

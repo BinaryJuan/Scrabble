@@ -28,10 +28,6 @@ public class Monton {
         System.out.println("Monton:" + montonString + "[" + this.fichas.size() + "]");
     }
 
-    public void mostrarCantidadMonton() {
-        System.out.println("Monton:" + "quedan [" + this.fichas.size() + "] fichas");
-    }
-
     public Ficha sacarFicha() {
         Integer posicionAleatoria = this.generarPosicionAleatoria();
         Ficha ficha = this.fichas.get(posicionAleatoria);

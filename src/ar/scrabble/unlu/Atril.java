@@ -18,14 +18,6 @@ public class Atril {
         this.fichas.remove(ficha);
     }
 
-    public void mostrarAtril() {
-        String fichasString = " ";
-        for (Ficha ficha : this.fichas) {
-            fichasString += ficha.getLetra() + " ";
-        }
-        System.out.println("Atril: " + fichasString + "[" + this.fichas.size() + "]");
-    }
-
     public Integer getTamanio() {
         return tamanio;
     }
