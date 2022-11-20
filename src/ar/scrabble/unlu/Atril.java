@@ -18,20 +18,8 @@ public class Atril {
         this.fichas.remove(ficha);
     }
 
-    public Integer getTamanio() {
-        return tamanio;
-    }
-
-    public void setTamanio(Integer tamanio) {
-        this.tamanio = tamanio;
-    }
-
     public ArrayList<Ficha> getFichas() {
         return fichas;
-    }
-
-    public void setFichas(ArrayList<Ficha> fichas) {
-        this.fichas = fichas;
     }
 
     public Ficha sacarFicha(Monton monton) {
@@ -49,7 +37,7 @@ public class Atril {
     }
 
     public void completarAtril(Monton monton) {
-        while (this.fichas.size() < 7) {
+        while (this.fichas.size() < this.tamanio) {
             Ficha fichaDelMonton = sacarFicha(monton);
             this.agregarFicha(fichaDelMonton);
         }

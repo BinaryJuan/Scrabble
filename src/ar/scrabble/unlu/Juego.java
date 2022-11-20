@@ -63,7 +63,7 @@ public class Juego {
             if (primerTurno == null) {
                 primerTurno = jugador;
             } else {
-                if (jugador.getPrimerTurno().getLetra() < primerTurno.getPrimerTurno().getLetra()) {
+                if (jugador.getPrimerTurno().getValor() > primerTurno.getPrimerTurno().getValor()) {
                     primerTurno = jugador;
                 }
             }
@@ -87,8 +87,6 @@ public class Juego {
         Palabra palabraFormada = new Palabra(0, posicionXInicial, posicionYInicial, posicionXFinal, posicionYFinal);
         return palabraFormada;
     }
-
-    
 
     public void setPuntajePalabra(Palabra palabra, Integer puntaje) {
         palabra.setPuntaje(puntaje);

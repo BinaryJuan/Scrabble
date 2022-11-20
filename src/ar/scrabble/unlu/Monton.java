@@ -2,30 +2,21 @@ package ar.scrabble.unlu;
 import java.util.ArrayList;
 
 public class Monton {
-
+    final int CANTIDAD_MONTON = 100;
     private ArrayList<Ficha> fichas;
     public Monton() {
         this.fichas = new ArrayList<Ficha>();
     }
 
     public void generarMonton() {
-        for (int i = 0; i < 100; i++) {
-            Ficha ficha = new Ficha('-', 0);
-            ficha.cargarFicha();
+        for (int i = 0; i < CANTIDAD_MONTON; i++) {
+            Ficha ficha = new Ficha(generarLetraAleatoria());
             this.fichas.add(ficha);
         }
     }
 
     public Integer getCantidad() {
         return this.fichas.size();
-    }
-
-    public void mostrarMonton() {
-        String montonString = " ";
-        for (Ficha ficha : this.fichas) {
-            montonString += ficha.getLetra() + " ";
-        }
-        System.out.println("Monton:" + montonString + "[" + this.fichas.size() + "]");
     }
 
     public Ficha sacarFicha() {
@@ -43,5 +34,97 @@ public class Monton {
 
     public ArrayList<Ficha> getFichas() {
         return fichas;
+    }
+
+    public char generarLetraAleatoria() {
+        String alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+        int alfabetoLength = alfabeto.length();
+        int random = (int) (alfabetoLength * Math.random());
+        char letraAleatoria = alfabeto.charAt(random);
+        Boolean encontrada = false;
+        while (!encontrada && this.fichas.size() < CANTIDAD_MONTON) {
+            random = (int) (alfabetoLength * Math.random());
+            letraAleatoria = alfabeto.charAt(random);
+            if (verificarCantidadDeLetra(letraAleatoria)) {
+                encontrada = true;
+            }
+        }
+        return letraAleatoria;
+    }
+
+    public boolean verificarCantidadDeLetra(char letra) {
+        int cantidadDeLetra = cantidadDeLetra(letra);
+        int contador = 0;
+        for (Ficha ficha : this.fichas) {
+            if (ficha.getLetraSimbolo() == letra) {
+                contador++;
+            }
+        }
+        if (contador < cantidadDeLetra) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Integer cantidadDeLetra(char letra) {
+        switch (letra) {
+            case 'A':
+                return 12;
+            case 'B':
+                return 4;
+            case 'C':
+                return 4;
+            case 'D':
+                return 5;
+            case 'E':
+                return 12;
+            case 'F':
+                return 1;
+            case 'G':
+                return 2;
+            case 'H':
+                return 2;
+            case 'I':
+                return 6;
+            case 'J':
+                return 1;
+            case 'K':
+                return 1;
+            case 'L':
+                return 4;
+            case 'M':
+                return 2;
+            case 'N':
+                return 5;
+            case 'Ñ':
+                return 1;
+            case 'O':
+                return 9;
+            case 'P':
+                return 2;
+            case 'Q':
+                return 1;
+            case 'R':
+                return 5;
+            case 'S':
+                return 6;
+            case 'T':
+                return 4;
+            case 'U':
+                return 5;
+            case 'V':
+                return 2;
+            case 'W':
+                return 1;
+            case 'X':
+                return 1;
+            case 'Y':
+                return 1;
+            case 'Z':
+                return 1;
+            default:
+                return 0;
+        }
     }
 }

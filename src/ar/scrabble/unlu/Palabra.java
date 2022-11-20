@@ -6,17 +6,12 @@ public class Palabra {
     private Integer finX;
     private Integer finY;
 
-    // constructor para palabras verticales
     public Palabra(Integer puntaje, Integer comienzoX, Integer comienzoY, Integer finX, Integer finY) {
         this.puntaje = puntaje;
         this.comienzoX = comienzoX;
         this.comienzoY = comienzoY;
         this.finX = finX;
         this.finY = finY;
-    }
-
-    public String getPalabra() {
-        return null;
     }
 
     public Integer getPuntaje() {
@@ -27,57 +22,6 @@ public class Palabra {
         this.puntaje = puntaje;
     }
 
-    public Integer getComienzoX() {
-        return comienzoX;
-    }
-
-    public Integer getComienzoY() {
-        return comienzoY;
-    }
-
-    public Integer getFinX() {
-        return finX;
-    }
-
-    public Integer getFinY() {
-        return finY;
-    }
-
-    public void setComienzoX(Integer comienzoX) {
-        this.comienzoX = comienzoX;
-    }
-
-    public void setComienzoY(Integer comienzoY) {
-        this.comienzoY = comienzoY;
-    }
-
-    public void setFinX(Integer finX) {
-        this.finX = finX;
-    }
-
-    public void setFinY(Integer finY) {
-        this.finY = finY;
-    }
-
-    // // metodo para recorrer el tablero desde comienzoX hasta finX y retornar un string
-    // public String getPalabraHorizontal(Tablero tablero) {
-    //     String palabra = "";
-    //     for (int i = this.comienzoX; i <= this.finX; i++) {
-    //         palabra += tablero.getCasillas()[i][this.comienzoY].getFicha().getLetra();
-    //     }
-    //     System.out.println(palabra);
-    //     return palabra;
-    // }
-
-    // public String getPalabraVertical(Tablero tablero) {
-    //     String palabra = "";
-    //     for (int i = this.comienzoY; i <= this.finY; i++) {
-    //         palabra += tablero.getCasillas()[this.comienzoX][i].getFicha().getLetra();
-    //     }
-    //     System.out.println(palabra);
-    //     return palabra;
-    // }
-
     public Boolean esHorizontal() {
         return this.comienzoY == this.finY;
     }
@@ -86,39 +30,22 @@ public class Palabra {
         return this.comienzoX == this.finX;
     }
 
-    // public Boolean esValida(Tablero tablero) {
-    //     if (this.esHorizontal()) {
-    //         return this.getPalabraHorizontal(tablero).length() >= 2;
-    //     } else {
-    //         return this.getPalabraVertical(tablero).length() >= 2;
-    //     }
-    // }
-
-    // public Boolean esValida(Tablero tablero, Diccionario diccionario) {
-    //     if (this.esHorizontal()) {
-    //         return diccionario.existePalabra(this.getPalabraHorizontal(tablero));
-    //     } else {
-    //         return diccionario.existePalabra(this.getPalabraVertical(tablero));
-    //     }
-    // }
-
-    // metodo para recorrer el tablero usando comienzoX y comienzoY y finX y finY y retornar un string con la palabra que se forma en el tablero
     public String calcularPalabra(Tablero tablero) {
         String palabra = "";
         if (this.esHorizontal()) {
             for (int i = this.comienzoX; i <= this.finX; i++) {
                 if (!tablero.getCasillas()[i][this.comienzoY].estaVacia()) {
-                    palabra += tablero.getCasillas()[i][this.comienzoY].getFicha().getLetra();
+                    palabra += tablero.getCasillas()[i][this.comienzoY].getFicha().getLetraSimbolo();
                 } else {
-                    palabra = "Palabra invalida";
+                    palabra = "Palabra inválida o está vacía";
                 }
             }
         } else {
             for (int i = this.comienzoY; i <= this.finY; i++) {
                 if (!tablero.getCasillas()[this.comienzoX][i].estaVacia()) {
-                    palabra += tablero.getCasillas()[this.comienzoX][i].getFicha().getLetra();
+                    palabra += tablero.getCasillas()[this.comienzoX][i].getFicha().getLetraSimbolo();
                 } else {
-                    palabra = "Palabra invalida";
+                    palabra = "Palabra inválida o está vacía";
                 }
             }
         }
@@ -205,7 +132,7 @@ public class Palabra {
                 }
             }
         } else {
-            System.out.println("La palabra no es valida");
+            System.out.println("La palabra no es válida");
             puntajePalabra = 0;
         }
         return puntajePalabra;

@@ -21,24 +21,7 @@ public class Tablero {
             {new Casilla(13, 0, Color.NORMAL), new Casilla(13, 1, Color.ROSA), new Casilla(13, 2, Color.NORMAL), new Casilla(13, 3, Color.NORMAL), new Casilla(13, 4, Color.NORMAL), new Casilla(13, 5, Color.AZUL), new Casilla(13, 6, Color.NORMAL), new Casilla(13, 7, Color.NORMAL), new Casilla(13, 8, Color.NORMAL), new Casilla(13, 9, Color.AZUL), new Casilla(13, 10, Color.NORMAL), new Casilla(13, 11, Color.NORMAL), new Casilla(13, 12, Color.NORMAL), new Casilla(13, 13, Color.ROSA), new Casilla(13, 14, Color.NORMAL)},
             {new Casilla(14, 0, Color.ROJO), new Casilla(14, 1, Color.NORMAL), new Casilla(14, 2, Color.NORMAL), new Casilla(14, 3, Color.AZULC), new Casilla(14, 4, Color.NORMAL), new Casilla(14, 5, Color.NORMAL), new Casilla(14, 6, Color.NORMAL), new Casilla(14, 7, Color.ROJO), new Casilla(14, 8, Color.NORMAL), new Casilla(14, 9, Color.NORMAL), new Casilla(14, 10, Color.NORMAL), new Casilla(14, 11, Color.AZULC), new Casilla(14, 12, Color.NORMAL), new Casilla(14, 13, Color.NORMAL), new Casilla(14, 14, Color.ROJO)},
         };
-        // for (int i = 0; i < 15; i++) {
-        //     for (int j = 0; j < 15; j++) {
-        //         this.casillas[i][j] = new Casilla(i, j);
-        //     }
-        // }
     }
-
-    // public void mostrarTablero() {
-    //     String tabla = "\u001B[33m       Y0   Y1   Y2   Y3   Y4   Y5   Y6   Y7   Y8   Y9   Y10  Y11  Y12  Y13  Y14  \u001B[0m";
-    //     for (int i = 0; i < 15; i++) {
-    //         tabla += "\n \u001B[33m X" + String.format("%1$2s", i) + " \u001B[0m";
-    //         for (int j = 0; j < 15; j++) {
-    //             tabla += this.casillas[i][j].devolverCasillaConValorYLetra();
-    //         }
-    //     }
-    //     System.out.println(tabla);
-    //     System.out.print("\u001B[0m");
-    // }
 
     public Casilla[][] getCasillas() {
         return casillas;
@@ -54,7 +37,7 @@ public class Tablero {
             this.casillas[x][y].setFicha(ficha);
             return true;
         } else {
-            System.out.println("La casilla ya esta ocupada");
+            System.out.println("La casilla ya está ocupada");
             return false;
         }
     }

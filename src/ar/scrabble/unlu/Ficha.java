@@ -1,18 +1,23 @@
 package ar.scrabble.unlu;
+
 public class Ficha {
-    private char letra;
+    private Letra letra;
     private Integer valor;
 
-    public Ficha(char c, Integer valor) {
-        this.letra = c;
-        this.valor = valor;
+    public Ficha(char c) {
+        this.letra = new Letra(c);
+        this.valor = this.letra.getValor();
     }
 
-    public char getLetra() {
+    public Letra getLetra() {
         return letra;
     }
 
-    public void setLetra(char letra) {
+    public char getLetraSimbolo() {
+        return letra.getLetra();
+    }
+
+    public void setLetra(Letra letra) {
         this.letra = letra;
     }
 
@@ -24,21 +29,8 @@ public class Ficha {
         this.valor = valor;
     }
 
-    // HACER QUE DE CADA LETRA HAYA UNA DETERMINADA CANTIDAD PERO QUE LE GENERACION DE LA LETRA SIGA SIENDO "ALEATORIA"
-    public char generarLetraAleatoria() {
-        String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        int n = alfabeto.length();
-        int r = (int) (n * Math.random());
-        return alfabeto.charAt(r);
-    }
-
     public Integer generarValorAleatorio() {
         int valor = (int) (Math.random() * 27);
         return valor;
-    }
-
-    public void cargarFicha() {
-        this.setLetra(this.generarLetraAleatoria());
-        this.setValor(this.generarValorAleatorio());
     }
 }

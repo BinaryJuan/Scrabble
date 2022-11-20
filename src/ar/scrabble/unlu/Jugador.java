@@ -62,6 +62,6 @@ public class Jugador {
 
     public char tomarFichaTurno(Monton monton) {
         Ficha ficha = monton.sacarFicha();
-        return ficha.getLetra();
+        return ficha.getLetraSimbolo();
     }
 }

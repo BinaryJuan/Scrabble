@@ -17,9 +17,9 @@ public class Controlador {
                 case 1:
                     Juego juego = new Juego();
                     juego.generarMonton();
-                    int cantidadJugadores = vista.inputCantidadJugadores();
                     vista.notificacionCargandoDiccionario();
                     juego.cargarDiccionario();
+                    int cantidadJugadores = vista.inputCantidadJugadores();
                     Boolean agregado = false;
                     while (!agregado) {
                         if (cantidadJugadores > 1 && cantidadJugadores < 5) {
@@ -44,7 +44,7 @@ public class Controlador {
                         switch (opcionJugador) {
                             case 1:
                                 Ficha ficha = juego.getMonton().sacarFicha();
-                                vista.mostrarFichaSacada(ficha.getLetra());
+                                vista.mostrarFichaSacada(ficha.getLetraSimbolo());
                                 juego.getTurnoActual().getAtril().agregarFicha(ficha);
                                 vista.mostrarCantidadMonton(juego.getMonton().getFichas().size());
                                 vista.mostrarAtril(juego.getTurnoActual().getAtril());
