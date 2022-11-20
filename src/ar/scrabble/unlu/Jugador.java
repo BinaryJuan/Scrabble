@@ -64,4 +64,15 @@ public class Jugador {
         Ficha ficha = monton.sacarFicha();
         return ficha.getLetraSimbolo();
     }
+
+    public void restarPuntajeFichasAtril() {
+        if (this.puntaje > 0 ) {
+            Integer puntajeHipotetico = this.puntaje - this.atril.getPuntajeTotal();
+            if (puntajeHipotetico >= 0) {
+                this.puntaje = puntajeHipotetico;
+            } else {
+                this.puntaje = 0;
+            }
+        }
+    }
 }

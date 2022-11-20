@@ -13,7 +13,7 @@ Proyecto para la Universidad Nacional de Luján (POO). Consiste en desarrollar u
 El objetivo del juego es obtener la mayor cantidad de puntos al formar palabras en un tablero que se conecten a las palabras (o no) creadas por los otros jugadores. Para jugar Scrabble, necesitarás al menos otro jugador (de 2 a 4 jugadores).
 1. Una vez que esté el tablero, el montón y los atriles con fichas, cada jugador agarrará una ficha del montón, y la que esté más cerca de la letra "A" será el que tenga el primer turno.
 2. Ahora que el jugador tiene el turno, deberá decidir si quiere:
-     - Sacar ficha del montón: en caso de que el jugador no se de cuenta de qué palabra puede generar, no pueda, o incluso si no quiere, puede pasar el turno y agarrar una ficha del montón.
+    - Sacar ficha del montón: en caso de que el jugador no se de cuenta de qué palabra puede generar, no pueda, o incluso si no quiere, puede pasar el turno y agarrar una ficha del montón.
     - Colocar ficha en el tablero: a través de coordenadas en el tablero se selecciona la ficha que se quiere colocar/agregar al tablero y se saca del atril.
     - Sacar ficha del tablero: a través de coordenadas en el tablero se selecciona la ficha que se quiere eliminar y devolver al atril.
     - Terminar turno: una vez que el jugador, ya sea porque no puede o no quiere generar una palabra nueva, o si formó una, esta opción permite pasar el turno y previamente preguntarle al jugador si formó o no una palabra. Si eligió la opción afirmativa, el jugador deberá seleccionar dónde empieza y termina su palabra a través de coordenadas en el tablero.

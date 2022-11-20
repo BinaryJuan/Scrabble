@@ -177,7 +177,7 @@ public class Vista {
             posicion++;
             fichasString += ficha.getLetraSimbolo() + "(" + posicion + ") ";
         }
-        System.out.println("Atril: " + fichasString + "[" + atril.getFichas().size() + "]");
+        System.out.println("Atril: " + fichasString + "\u001B[34m[" + atril.getFichas().size() + "]\u001B[0m");
     }
 
     
@@ -233,6 +233,14 @@ public class Vista {
     public void mostrarPalabraInvalida() {
         System.out.println("\u001B[31m" + "La palabra no es válida en el diccionario");
         System.out.print("\u001B[0m");
+    }
+
+    public void mostrarVecesConsecutivasSinTurno() {
+        System.out.println("Se alcanzó el máximo de turnos consecutivos sin poder jugar (2)");
+    }
+
+    public void mostrarRestoDelPuntaje() {
+        System.out.println("Se le restará al puntaje el valor total del resto de las fichas que tenga en el atril");
     }
 
     public void notificacionAtrilActualizado() {

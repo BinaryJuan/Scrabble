@@ -8,6 +8,7 @@ public class Juego {
     private Monton monton;
     private Jugador turnoActual;
     private Diccionario diccionario;
+    private int vecesConsecutivasSinTurno;
     static Scanner sc;
 
     public Juego() {
@@ -16,6 +17,7 @@ public class Juego {
         this.monton = new Monton();
         this.turnoActual = null;
         this.diccionario = new Diccionario();
+        this.vecesConsecutivasSinTurno = 0;
     }
 
     public void agregarJugador(String nombre) {
@@ -129,5 +131,23 @@ public class Juego {
 
     public Boolean buscarPalabra(String palabra) {
         return diccionario.buscarPalabra(palabra);
+    }
+
+    public void reiniciarVecesConsecutivasSinTurno() {
+        this.vecesConsecutivasSinTurno = 0;
+    }
+
+    public void aumentarVecesConsecutivasSinTurno() {
+        this.vecesConsecutivasSinTurno++;
+    }
+
+    public Boolean limiteVecesConsecutivas() {
+        return this.vecesConsecutivasSinTurno == 2;
+    }
+
+    public void restarPuntajeFichasAtril() {
+        for (Jugador jugador : jugadores) {
+            jugador.restarPuntajeFichasAtril();
+        }
     }
 }

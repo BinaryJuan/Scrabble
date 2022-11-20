@@ -42,4 +42,12 @@ public class Atril {
             this.agregarFicha(fichaDelMonton);
         }
     }
+
+    public Integer getPuntajeTotal() {
+        Integer puntajeTotal = 0;
+        for (Ficha ficha : this.fichas) {
+            puntajeTotal += ficha.getValor();
+        }
+        return puntajeTotal;
+    }
 }
