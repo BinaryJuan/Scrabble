@@ -15,7 +15,11 @@ public class Atril {
     }
 
     public void eliminarFicha(Ficha ficha) {
-        this.fichas.remove(ficha);
+        if (ficha != null) {
+            this.fichas.remove(ficha);
+        } else {
+            System.out.println("[ERROR MODELO] No se puede eliminar una ficha nula");
+        }
     }
 
     public ArrayList<Ficha> getFichas() {

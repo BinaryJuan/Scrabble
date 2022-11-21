@@ -8,15 +8,15 @@ enum Color {
 }
 
 public class Casilla {
-    private Ficha ficha;
-    private Color color;
-    private Integer coordenadaX;
-    private Integer coordenadaY;
-    public Casilla(Integer coordenadaX, Integer coordenadaY, Color color) {
+    protected Ficha ficha;
+    protected Color color;
+    protected Integer coordenadaX;
+    protected Integer coordenadaY;
+    public Casilla(Integer coordenadaX, Integer coordenadaY) {
         this.ficha = null;
-        this.color = color;
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
+        this.color = Color.NORMAL;
     }
 
     public Ficha getFicha() {
@@ -44,20 +44,7 @@ public class Casilla {
     }
 
     public String colorConsola() {
-        switch (this.color) {
-            case NORMAL:
-                return "\u001B[0m";
-            case AZULC:
-                return "\u001B[36m";
-            case AZUL:
-                return "\u001B[34m";
-            case ROSA:
-                return "\u001B[35m";
-            case ROJO:
-                return "\u001B[31m";
-            default:
-                return "\u001B[0m";
-        }
+        return "\u001B[0m";
     }
 
     public String devolverCasillaConValorYLetra() {

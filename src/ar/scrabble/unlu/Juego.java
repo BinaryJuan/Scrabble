@@ -150,4 +150,65 @@ public class Juego {
             jugador.restarPuntajeFichasAtril();
         }
     }
+
+    public void setFichasFalse() {
+        this.tablero.setFichasFalse();
+    }
+
+    public Boolean validarOpcionJugadorMenuPrincipal(Integer opcion) {
+        return opcion == 1 || opcion == 2;
+    }
+
+    public Boolean validarCantidadJugadores(Integer cantidadJugadores) {
+        return cantidadJugadores >= 2 && cantidadJugadores <= 4;
+    }
+
+    public Boolean validarNombreJugador(String nombre) {
+        nombre = nombre.trim();
+        if (nombre == null || nombre.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Boolean validarOpcionJugador (Integer opcion) {
+        if (opcion == 1 || opcion == 2 || opcion == 3 || opcion == 4 || opcion == 5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Boolean validarOpcionFichaAtril(Integer opcion, Atril atril) {
+        if (opcion >= 1 && opcion <= atril.getFichas().size()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Boolean validarPosicionTablero(Integer posicionX, Integer posicionY) {
+        if (posicionX >= 0 && posicionX <= 14 && posicionY >= 0 && posicionY <= 14) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Boolean validarOpcionPalabra(Integer opcion) {
+        if (opcion == 1 || opcion == 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Boolean validarPosicionTableroPalabra(Integer posicionXInicial, Integer posicionYInicial, Integer posicionXFinal, Integer posicionYFinal) {
+        if (posicionXInicial >= 0 && posicionXInicial <= 14 && posicionYInicial >= 0 && posicionYInicial <= 14 && posicionXFinal >= 0 && posicionXFinal <= 14 && posicionYFinal >= 0 && posicionYFinal <= 14) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

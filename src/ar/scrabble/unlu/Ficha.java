@@ -3,10 +3,12 @@ package ar.scrabble.unlu;
 public class Ficha {
     private Letra letra;
     private Integer valor;
+    private Boolean esTurnoActual;
 
     public Ficha(char c) {
         this.letra = new Letra(c);
         this.valor = this.letra.getValor();
+        this.esTurnoActual = false;
     }
 
     public Letra getLetra() {
@@ -32,5 +34,17 @@ public class Ficha {
     public Integer generarValorAleatorio() {
         int valor = (int) (Math.random() * 27);
         return valor;
+    }
+
+    public Boolean getEsTurnoActual() {
+        return esTurnoActual;
+    }
+
+    public void setEsTurnoActual(Boolean esTurnoActual) {
+        this.esTurnoActual = esTurnoActual;
+    }
+
+    public void setEsTurnoActualTrue() {
+        this.esTurnoActual = true;
     }
 }

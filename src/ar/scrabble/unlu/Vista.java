@@ -7,16 +7,20 @@ public class Vista {
 
     public int inputMenuPrincipal() {
         sc = new Scanner(System.in);
-        System.out.print("\u001B[34m");
-        System.out.println("====================");
-        System.out.println("¡Bienvenido a Scrabble!");
-        System.out.println("====================");
-        System.out.print("\u001B[0m");
         System.out.println("\u001B[32m 1. JUGAR");
         System.out.println("\u001B[31m 2. SALIR");
         System.out.print("\u001B[0m");
         System.out.print("\u001B[33m Ingrese una opción: ");
         System.out.print("\u001B[0m");
+        while (!sc.hasNextInt()) {
+            System.out.println("\u001B[31m Ingrese una opción válida");
+            System.out.print("\u001B[0m");
+            System.out.println("\u001B[32m 1. JUGAR");
+            System.out.println("\u001B[31m 2. SALIR");
+            System.out.print("\u001B[33m Ingrese una opción: ");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
         int opcionElegida = sc.nextInt();
         return opcionElegida;
     }
@@ -29,6 +33,18 @@ public class Vista {
         System.out.println("4. Terminar turno");
         System.out.println("5. Salir del juego");
         System.out.print("\u001B[0m");
+        while (!sc.hasNextInt()) {
+            System.out.println("\u001B[31m Ingrese una opción válida");
+            System.out.print("\u001B[0m");
+            System.out.println("\u001B[33m Ingrese una opción, " + jugador + ":");
+            System.out.println("1. Sacar ficha del montón");
+            System.out.println("2. Colocar ficha en el tablero");
+            System.out.println("3. Sacar ficha del tablero");
+            System.out.println("4. Terminar turno");
+            System.out.println("5. Salir del juego");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
         Integer opcionJugador = sc.nextInt();
         return opcionJugador;
     }
@@ -36,6 +52,13 @@ public class Vista {
     public int inputCantidadJugadores() {
         System.out.print("\u001B[33m Ingrese la cantidad de jugadores: ");
         System.out.print("\u001B[0m");
+        while (!sc.hasNextInt()) {
+            System.out.print("\u001B[31m Ingrese un número válido (cant. de jugadores)");
+            System.out.println("\u001B[0m");
+            System.out.print("\u001B[33m Ingrese la cantidad de jugadores: ");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
         Integer cantidadJugadores = sc.nextInt();
         return cantidadJugadores;
     }
@@ -49,36 +72,71 @@ public class Vista {
 
     public Integer inputPosicionAtril() {
         System.out.println("\u001B[33mIngrese la \u001B[34mposición en el atril\u001B[33m de la ficha que desea colocar (pos. de 1 en adelante): ");
-        Integer posicionAtril = sc.nextInt();
         System.out.print("\u001B[0m");
+        while (!sc.hasNextInt()) {
+            System.out.println("\u001B[31m Ingrese una posición válida");
+            System.out.print("\u001B[0m");
+            System.out.println("\u001B[33mIngrese la \u001B[34mposición en el atril\u001B[33m de la ficha que desea colocar (pos. de 1 en adelante): ");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
+        Integer posicionAtril = sc.nextInt();
         return posicionAtril;
     }
 
     public Integer inputPosicionX() {
         System.out.println("Ingrese la \u001B[34mposición X\u001B[0m en la que desea \u001B[34mcolocar la ficha\u001B[0m: ");
-        Integer posicionX = sc.nextInt();
         System.out.print("\u001B[0m");
+        while (!sc.hasNextInt()) {
+            System.out.println("\u001B[31m Ingrese una posición válida");
+            System.out.print("\u001B[0m");
+            System.out.println("Ingrese la \u001B[34mposición X\u001B[0m en la que desea \u001B[34mcolocar la ficha\u001B[0m: ");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
+        Integer posicionX = sc.nextInt();
         return posicionX;
     }
 
     public Integer inputPosicionY() {
         System.out.println("Ingrese la \u001B[34mposición Y\u001B[0m en la que desea \u001B[34mcolocar la ficha\u001B[0m: ");
-        Integer posicionY = sc.nextInt();
         System.out.print("\u001B[0m");
+        while (!sc.hasNextInt()) {
+            System.out.println("\u001B[31m Ingrese una posición válida");
+            System.out.print("\u001B[0m");
+            System.out.println("Ingrese la \u001B[34mposición Y\u001B[0m en la que desea \u001B[34mcolocar la ficha\u001B[0m: ");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
+        Integer posicionY = sc.nextInt();
         return posicionY;
     }
 
     public Integer inputSacarPosicionX() {
-        System.out.println("\u001B[33m Ingrese la \u001B[34mposición X\u001B[0m de la ficha que desea sacar: ");
-        Integer posicionXSacar = sc.nextInt();
+        System.out.println("Ingrese la \u001B[34mposición X\u001B[0m de la ficha que desea \u001B[31msacar\u001B[0m: ");
         System.out.print("\u001B[0m");
-        return posicionXSacar;
+        while (!sc.hasNextInt()) {
+            System.out.println("\u001B[31m Ingrese una posición válida");
+            System.out.print("\u001B[0m");
+            System.out.println("Ingrese la \u001B[34mposición X\u001B[0m de la ficha que desea \u001B[31msacar\u001B[0m: ");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
+        Integer posicionX = sc.nextInt();
+        return posicionX;
     }
 
     public Integer inputSacarPosicionY() {
         System.out.println("Ingrese la \u001B[34mposición Y\u001B[34m de la ficha que desea \u001B[31msacar\u001B[0m: ");
-        Integer posicionYSacar = sc.nextInt();
+        while (!sc.hasNextInt()) {
+            System.out.println("\u001B[31m Ingrese una posición válida");
+            System.out.print("\u001B[0m");
+            System.out.println("Ingrese la \u001B[34mposición Y\u001B[34m de la ficha que desea \u001B[31msacar\u001B[0m: ");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
         System.out.print("\u001B[0m");
+        Integer posicionYSacar = sc.nextInt();
         return posicionYSacar;
     }
 
@@ -86,6 +144,15 @@ public class Vista {
         System.out.println("\u001B[33m ¿Usted formó una palabra?: ");
         System.out.println("1. Sí");
         System.out.println("2. No");
+        while (!sc.hasNextInt()) {
+            System.out.println("\u001B[31m Ingrese una opción válida");
+            System.out.print("\u001B[0m");
+            System.out.println("\u001B[33m ¿Usted formó una palabra?: ");
+            System.out.println("1. Sí");
+            System.out.println("2. No");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
         Integer opcionPalabra = sc.nextInt();
         return opcionPalabra;
     }
@@ -93,32 +160,60 @@ public class Vista {
     public Integer inputPalabraPosicionInicialX() {
         System.out.print("\u001B[33m");
         System.out.println("Ingrese la \u001B[34mposición X\u001B[33m de la ficha inicial: ");
-        Integer posicionXInicial = sc.nextInt();
+        while (!sc.hasNextInt()) {
+            System.out.println("\u001B[31m Ingrese una posición válida");
+            System.out.print("\u001B[0m");
+            System.out.println("Ingrese la \u001B[34mposición X\u001B[33m de la ficha inicial: ");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
         System.out.print("\u001B[0m");
+        Integer posicionXInicial = sc.nextInt();
         return posicionXInicial;
     }
 
     public Integer inputPalabraPosicionInicialY() {
         System.out.print("\u001B[33m");
         System.out.println("Ingrese la \u001B[34mposición Y\u001B[33m de la ficha inicial: ");
-        Integer posicionYInicial = sc.nextInt();
+        while (!sc.hasNextInt()) {
+            System.out.println("\u001B[31m Ingrese una posición válida");
+            System.out.print("\u001B[0m");
+            System.out.println("Ingrese la \u001B[34mposición Y\u001B[33m de la ficha inicial: ");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
         System.out.print("\u001B[0m");
+        Integer posicionYInicial = sc.nextInt();
         return posicionYInicial;
     }
 
     public Integer inputPalabraPosicionFinalX() {
         System.out.print("\u001B[33m");
         System.out.println("Ingrese la \u001B[34mposición X\u001B[33m de la ficha final: ");
-        Integer posicionXFinal = sc.nextInt();
+        while (!sc.hasNextInt()) {
+            System.out.println("\u001B[31m Ingrese una posición válida");
+            System.out.print("\u001B[0m");
+            System.out.println("Ingrese la \u001B[34mposición X\u001B[33m de la ficha final: ");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
         System.out.print("\u001B[0m");
+        Integer posicionXFinal = sc.nextInt();
         return posicionXFinal;
     }
 
     public Integer inputPalabraPosicionFinalY() {
         System.out.print("\u001B[33m");
         System.out.println("Ingrese la \u001B[34mposición Y\u001B[33m de la ficha final: ");
-        Integer posicionYFinal = sc.nextInt();
+        while (!sc.hasNextInt()) {
+            System.out.println("\u001B[31m Ingrese una posición válida");
+            System.out.print("\u001B[0m");
+            System.out.println("Ingrese la \u001B[34mposición Y\u001B[33m de la ficha final: ");
+            System.out.print("\u001B[0m");
+            sc.next();
+        }
         System.out.print("\u001B[0m");
+        Integer posicionYFinal = sc.nextInt();
         return posicionYFinal;
     }
 
@@ -143,8 +238,31 @@ public class Vista {
         System.out.print("\u001B[0m");
     }
 
+    public void mostrarNombreDeJugadorIncorrecto() {
+        System.out.println("\u001B[31m ¡El nombre del jugador no puede estar vacío!");
+        System.out.print("\u001B[0m");
+    }
+
     public void mostrarOpcionInvalida() {
         System.out.println("\u001B[31m" + "Opción incorrecta");
+        System.out.print("\u001B[0m");
+    }
+
+    public void mostrarOpcionInvalidaAtril() {
+        System.out.println("\u001B[31m" + "Opción incorrecta en el atril");
+        System.out.print("\u001B[0m");
+    }
+
+    public void mostrarPosicionInvalida() {
+        System.out.println("\u001B[31m" + "Posición/es en tablero inválida/s");
+        System.out.print("\u001B[0m");
+    }
+
+    public void mostrarBienvenida() {
+        System.out.print("\u001B[34m");
+        System.out.println("====================");
+        System.out.println("¡Bienvenido a Scrabble!");
+        System.out.println("====================");
         System.out.print("\u001B[0m");
     }
 
@@ -248,7 +366,7 @@ public class Vista {
     }
 
     public void notificacionFichaInexistente() {
-        System.out.println("\u001B[31m" + "La ficha que trata de sacar en esa posición no existe");
+        System.out.println("\u001B[31m" + "La ficha que trata de sacar en esa posición no existe o no es perteneciente a su turno");
         System.out.print("\u001B[0m");
     }
 

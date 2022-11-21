@@ -10,9 +10,19 @@ public class Controlador {
     }
 
     public void partida() {
+        vista.mostrarBienvenida();
         Boolean terminado = false;
         while (!terminado) {
             int opcionElegida = vista.inputMenuPrincipal();
+            Boolean agregado = false;
+            while (!agregado) {
+                if (juego.validarOpcionJugadorMenuPrincipal(opcionElegida)) {
+                    agregado = true;
+                } else {
+                    vista.mostrarOpcionInvalida();
+                    opcionElegida = vista.inputMenuPrincipal();
+                }
+            }
             switch (opcionElegida) {
                 case 1:
                     Juego juego = new Juego();
@@ -20,17 +30,27 @@ public class Controlador {
                     vista.notificacionCargandoDiccionario();
                     juego.cargarDiccionario();
                     int cantidadJugadores = vista.inputCantidadJugadores();
-                    Boolean agregado = false;
+                    agregado = false;
                     while (!agregado) {
-                        if (cantidadJugadores > 1 && cantidadJugadores < 5) {
+                        if (juego.validarCantidadJugadores(cantidadJugadores)) {
                             agregado = true;
                         } else {
                             vista.mostrarCantidadDeJugadoresIncorrecta();
+                            cantidadJugadores = vista.inputCantidadJugadores();
                         }
                     }
                     for (int i = 0; i < cantidadJugadores; i++) {
-                        String nombre = vista.inputNombreJugador(i + 1);
-                        juego.agregarJugador(nombre);
+                        agregado = false;
+                        while (!agregado) {
+                            String nombre = vista.inputNombreJugador(i + 1);
+                            if (juego.validarNombreJugador(nombre)) {
+                                juego.agregarJugador(nombre);
+                                agregado = true;
+                            } else {
+                                vista.mostrarNombreDeJugadorIncorrecto();
+                                nombre = vista.inputNombreJugador(i + 1);
+                            }
+                        }
                     }
                     juego.generarTablero();
                     vista.mostrarTablero(juego.getTablero().getCasillas());
@@ -48,6 +68,15 @@ public class Controlador {
                             vista.mostrarTurno(juego.getTurnoActual().getNombre(), juego.getTurnoActual().getPuntaje());
                             vista.mostrarAtril(juego.getTurnoActual().getAtril());
                             int opcionJugador = vista.inputMenuTurno(juego.getTurnoActual().getNombre());
+                            agregado = false;
+                            while (!agregado) {
+                                if (juego.validarOpcionJugador(opcionJugador)) {
+                                    agregado = true;
+                                } else {
+                                    vista.mostrarOpcionInvalida();
+                                    opcionJugador = vista.inputMenuTurno(juego.getTurnoActual().getNombre());
+                                }
+                            }
                             switch (opcionJugador) {
                                 case 1:
                                     Ficha ficha = juego.getMonton().sacarFicha();
@@ -60,13 +89,33 @@ public class Controlador {
                                 case 2:
                                     vista.mostrarTablero(juego.getTablero().getCasillas());
                                     vista.mostrarAtril(juego.getTurnoActual().getAtril());
-                                    int opcionFichaAtril = vista.inputPosicionAtril();
+                                    Integer opcionFichaAtril = vista.inputPosicionAtril();
+                                    agregado = false;
+                                    while (!agregado) {
+                                        if (juego.validarOpcionFichaAtril(opcionFichaAtril, juego.getTurnoActual().getAtril())) {
+                                            agregado = true;
+                                        } else {
+                                            vista.mostrarOpcionInvalidaAtril();
+                                            opcionFichaAtril = vista.inputPosicionAtril();
+                                        }
+                                    }
                                     Ficha fichaColocar = juego.getTurnoActual().getAtril().getFichas().get(opcionFichaAtril - 1);
-                                    int coordenadaX = vista.inputPosicionX();
-                                    int coordenadaY = vista.inputPosicionY();
+                                    Integer coordenadaX = vista.inputPosicionX();
+                                    Integer coordenadaY = vista.inputPosicionY();
+                                    agregado = false;
+                                    while (!agregado) {
+                                        if (juego.validarPosicionTablero(coordenadaX, coordenadaY)) {
+                                            agregado = true;
+                                        } else {
+                                            vista.mostrarPosicionInvalida();
+                                            coordenadaX = vista.inputPosicionX();
+                                            coordenadaY = vista.inputPosicionY();
+                                        }
+                                    }
                                     Boolean colocada = juego.getTablero().colocarFicha(fichaColocar, coordenadaX, coordenadaY);
                                     if (colocada) {
                                         juego.getTurnoActual().getAtril().getFichas().remove(opcionFichaAtril - 1);
+                                        fichaColocar.setEsTurnoActualTrue();
                                     } else {
                                         vista.mostrarFichaNoColocada();
                                     }
@@ -78,10 +127,21 @@ public class Controlador {
                                     vista.mostrarTablero(juego.getTablero().getCasillas());
                                     Integer posicionSacarX = vista.inputSacarPosicionX();
                                     Integer posicionSacarY = vista.inputSacarPosicionY();
-                                    Ficha fichaSacar = juego.getTablero().sacarFicha(posicionSacarX, posicionSacarY);
-                                    vista.mostrarTablero(juego.getTablero().getCasillas());
-                                    if (fichaSacar != null) {
-                                        juego.getTurnoActual().getAtril().agregarFicha(fichaSacar);
+                                    Boolean sacado = false;
+                                    while (!sacado) {
+                                        if (juego.validarPosicionTablero(posicionSacarX, posicionSacarY)) {
+                                            sacado = true;
+                                        } else {
+                                            vista.mostrarPosicionInvalida();
+                                            posicionSacarX = vista.inputSacarPosicionX();
+                                            posicionSacarY = vista.inputSacarPosicionY();
+                                        }
+                                    }
+                                    Ficha fichaInspeccionada = juego.getTablero().inspeccionarFicha(posicionSacarX, posicionSacarY);
+                                    if (fichaInspeccionada != null && fichaInspeccionada.getEsTurnoActual()) {
+                                        juego.getTablero().sacarFicha(posicionSacarX, posicionSacarY);
+                                        vista.mostrarTablero(juego.getTablero().getCasillas());
+                                        juego.getTurnoActual().getAtril().agregarFicha(fichaInspeccionada);
                                         vista.notificacionAtrilActualizado();
                                         vista.mostrarAtril(juego.getTurnoActual().getAtril());
                                     } else {
@@ -91,12 +151,33 @@ public class Controlador {
                                 case 4:
                                     juego.getTurnoActual().getAtril().completarAtril(juego.getMonton());
                                     Integer opcionPalabra = vista.inputPalabraFormada();
+                                    Boolean palabraValida = false;
+                                    while (!palabraValida) {
+                                        if (juego.validarOpcionPalabra(opcionPalabra)) {
+                                            palabraValida = true;
+                                        } else {
+                                            vista.mostrarOpcionInvalida();
+                                            opcionPalabra = vista.inputPalabraFormada();
+                                        }
+                                    }
                                     if (opcionPalabra == 1) {
                                         vista.mostrarDondeEmpiezaYTerminaPalabra();
                                         Integer posicionXInicial = vista.inputPalabraPosicionInicialX();
                                         Integer posicionYInicial = vista.inputPalabraPosicionInicialY();
                                         Integer posicionXFinal = vista.inputPalabraPosicionFinalX();
                                         Integer posicionYFinal = vista.inputPalabraPosicionFinalY();
+                                        Boolean posicionesValidas = false;
+                                        while (!posicionesValidas) {
+                                            if (juego.validarPosicionTableroPalabra(posicionXInicial, posicionYInicial, posicionXFinal, posicionYFinal)) {
+                                                posicionesValidas = true;
+                                            } else {
+                                                vista.mostrarPosicionInvalida();
+                                                posicionXInicial = vista.inputPalabraPosicionInicialX();
+                                                posicionYInicial = vista.inputPalabraPosicionInicialY();
+                                                posicionXFinal = vista.inputPalabraPosicionFinalX();
+                                                posicionYFinal = vista.inputPalabraPosicionFinalY();
+                                            }
+                                        }
                                         Palabra palabraFormada = juego.crearPalabra(posicionXInicial, posicionYInicial, posicionXFinal, posicionYFinal);
                                         vista.mostrarPalabraFormada(juego.getTablero(), palabraFormada);
                                         String palabraBuscar = palabraFormada.calcularPalabra(juego.getTablero());
@@ -119,6 +200,7 @@ public class Controlador {
                                         juego.aumentarVecesConsecutivasSinTurno();
                                         vista.mostrarPalabraNoFormada();
                                     }
+                                    juego.setFichasFalse();
                                     break;
                                 case 5:
                                     terminado = true;

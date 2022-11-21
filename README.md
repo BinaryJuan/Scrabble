@@ -29,3 +29,5 @@ El objetivo del juego es obtener la mayor cantidad de puntos al formar palabras 
 - El juego termina cuando: un jugador gasta todas las fichas de su atril y ya no hay fichas en el monton; cuando ningún jugador puede colocar más palabras en el tablero y han pasado 2 veces consecutivas.
  
 ![](https://media.istockphoto.com/id/502558269/es/foto/letras-de-scrabble.jpg?s=612x612&w=0&k=20&c=GOwivnVneQm1epYLWneIFEFjojL2jqXm8p2Uu_doyLk=)
+
+### UML
