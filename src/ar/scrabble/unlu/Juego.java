@@ -8,7 +8,7 @@ public class Juego {
     private Monton monton;
     private Jugador turnoActual;
     private Diccionario diccionario;
-    private int vecesConsecutivasSinTurno;
+    private Integer vecesConsecutivasSinTurno;
     static Scanner sc;
 
     public Juego() {
@@ -20,15 +20,16 @@ public class Juego {
         this.vecesConsecutivasSinTurno = 0;
     }
 
-    public void agregarJugador(String nombre) {
+    public Jugador agregarJugador(String nombre) {
         Jugador jugador = new Jugador(nombre);
         jugador.getAtril().generarAtril(monton);
         jugadores.add(jugador);
+        return jugador;
     }
 
     public Jugador siguienteTurno(Jugador jugadorActual) {
         Jugador siguienteTurno = null;
-        for (int i = 0; i < jugadores.size(); i++) {
+        for (Integer i = 0; i < jugadores.size(); i++) {
             if (jugadores.get(i).getNombre().equals(jugadorActual.getNombre())) {
                 if (i == jugadores.size() - 1) {
                     siguienteTurno = jugadores.get(0);
@@ -38,10 +39,6 @@ public class Juego {
             }
         }
         return siguienteTurno;
-    }
-
-    public void generarTablero() {
-        tablero.generarTablero();
     }
 
     public void generarMonton() {

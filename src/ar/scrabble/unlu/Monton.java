@@ -1,15 +1,29 @@
 package ar.scrabble.unlu;
 import java.util.ArrayList;
 
-public class Monton {
-    final int CANTIDAD_MONTON = 100;
+public class Monton implements Observable {
+    final Integer CANTIDAD_MONTON = 100;
     private ArrayList<Ficha> fichas;
+    private ArrayList<Observador> observadores;
+
     public Monton() {
         this.fichas = new ArrayList<Ficha>();
+        this.observadores = new ArrayList<Observador>();
+    }
+
+    @Override
+    public void notificar() {
+        for (Observador observador : observadores) {
+            observador.actualizarMonton(getCantidad());
+        }
+    }
+
+    public void enlazarObservador(Observador o) {
+        observadores.add(o);
     }
 
     public void generarMonton() {
-        for (int i = 0; i < CANTIDAD_MONTON; i++) {
+        for (Integer i = 0; i < CANTIDAD_MONTON; i++) {
             Ficha ficha = new Ficha(generarLetraAleatoria());
             this.fichas.add(ficha);
         }
@@ -23,12 +37,13 @@ public class Monton {
         Integer posicionAleatoria = this.generarPosicionAleatoria();
         Ficha ficha = this.fichas.get(posicionAleatoria);
         this.fichas.remove(ficha);
+        notificar();
         return ficha;
     }
 
     public Integer generarPosicionAleatoria() {
-        int n = this.fichas.size();
-        int r = (int) (n * Math.random());
+        Integer n = this.fichas.size();
+        Integer r = (int) (n * Math.random());
         return r;
     }
 
@@ -38,8 +53,8 @@ public class Monton {
 
     public char generarLetraAleatoria() {
         String alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-        int alfabetoLength = alfabeto.length();
-        int random = (int) (alfabetoLength * Math.random());
+        Integer alfabetoLength = alfabeto.length();
+        Integer random = (int) (alfabetoLength * Math.random());
         char letraAleatoria = alfabeto.charAt(random);
         Boolean encontrada = false;
         while (!encontrada && this.fichas.size() < CANTIDAD_MONTON) {
@@ -53,8 +68,8 @@ public class Monton {
     }
 
     public boolean verificarCantidadDeLetra(char letra) {
-        int cantidadDeLetra = cantidadDeLetra(letra);
-        int contador = 0;
+        Integer cantidadDeLetra = cantidadDeLetra(letra);
+        Integer contador = 0;
         for (Ficha ficha : this.fichas) {
             if (ficha.getLetraSimbolo() == letra) {
                 contador++;

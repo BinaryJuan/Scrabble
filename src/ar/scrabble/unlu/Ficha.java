@@ -32,7 +32,7 @@ public class Ficha {
     }
 
     public Integer generarValorAleatorio() {
-        int valor = (int) (Math.random() * 27);
+        Integer valor = (int) (Math.random() * 27);
         return valor;
     }
 

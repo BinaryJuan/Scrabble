@@ -2,10 +2,34 @@ package ar.scrabble.unlu;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Vista {
+public class Vista implements Observador {
     static Scanner sc;
 
-    public int inputMenuPrincipal() {
+    @Override
+    public void actualizarTablero(Casilla[][] casillas) {
+        System.out.println("Tablero actualizado");
+        mostrarTablero(casillas);
+    }
+
+    @Override
+    public void actualizarPuntajeJugador(String jugador, Integer puntaje) {
+        System.out.println("Puntaje actualizado");
+        mostrarpuntajeActualizado(jugador, puntaje);
+    }
+
+    @Override
+    public void actualizarMonton(Integer cantidad) {
+        System.out.println("Montón actualizado");
+        mostrarCantidadMonton(cantidad);
+    }
+
+    @Override
+    public void actualizarAtril(Atril atril) {
+        System.out.println("Atril actualizado");
+        mostrarAtril(atril);
+    }
+
+    public Integer inputMenuPrincipal() {
         sc = new Scanner(System.in);
         System.out.println("\u001B[32m 1. JUGAR");
         System.out.println("\u001B[31m 2. SALIR");
@@ -21,11 +45,11 @@ public class Vista {
             System.out.print("\u001B[0m");
             sc.next();
         }
-        int opcionElegida = sc.nextInt();
+        Integer opcionElegida = sc.nextInt();
         return opcionElegida;
     }
 
-    public int inputMenuTurno(String jugador) {
+    public Integer inputMenuTurno(String jugador) {
         System.out.println("\u001B[33m Ingrese una opción, " + jugador + ":");
         System.out.println("1. Sacar ficha del montón");
         System.out.println("2. Colocar ficha en el tablero");
@@ -49,7 +73,7 @@ public class Vista {
         return opcionJugador;
     }
 
-    public int inputCantidadJugadores() {
+    public Integer inputCantidadJugadores() {
         System.out.print("\u001B[33m Ingrese la cantidad de jugadores: ");
         System.out.print("\u001B[0m");
         while (!sc.hasNextInt()) {
@@ -218,11 +242,11 @@ public class Vista {
     }
 
     public void mostrarTurno(String jugador, Integer puntaje) {
+        System.out.println("\u001B[34m--------------------");
+        System.out.println(" [Turno de " + jugador + "]");
+        System.out.println(" PUNTAJE: " + puntaje);
         System.out.println("--------------------");
-        System.out.println("\u001B[34m [Turno de " + jugador + "]");
-        System.out.println("\u001B[34m PUNTAJE: " + puntaje);
         System.out.print("\u001B[0m");
-        System.out.println("--------------------");
     }
 
     public void mostrarCantidadDeJugadoresIncorrecta() {
@@ -272,9 +296,9 @@ public class Vista {
 
     public void mostrarTablero(Casilla[][] casillas) {
         String tabla = "\u001B[33m       Y0   Y1   Y2   Y3   Y4   Y5   Y6   Y7   Y8   Y9   Y10  Y11  Y12  Y13  Y14  \u001B[0m";
-        for (int i = 0; i < 15; i++) {
+        for (Integer i = 0; i < 15; i++) {
             tabla += "\n \u001B[33m X" + String.format("%1$2s", i) + " \u001B[0m";
-            for (int j = 0; j < 15; j++) {
+            for (Integer j = 0; j < 15; j++) {
                 tabla += casillas[i][j].devolverCasillaConValorYLetra();
             }
         }

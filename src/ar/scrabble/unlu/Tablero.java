@@ -1,7 +1,9 @@
 package ar.scrabble.unlu;
+import java.util.ArrayList;
 
-public class Tablero {
+public class Tablero implements Observable {
     private Casilla[][] casillas;
+    private ArrayList<Observador> observadores;
 
     public Tablero() {
         this.casillas = new Casilla[][] {
@@ -21,20 +23,29 @@ public class Tablero {
             {new CasillaNormal(13, 0), new CasillaPalabraDoble(13, 1), new CasillaNormal(13, 2), new CasillaNormal(13, 3), new CasillaNormal(13, 4), new CasillaLetraTriple(13, 5), new CasillaNormal(13, 6), new CasillaNormal(13, 7), new CasillaNormal(13, 8), new CasillaLetraTriple(13, 9), new CasillaNormal(13, 10), new CasillaNormal(13, 11), new CasillaNormal(13, 12), new CasillaPalabraDoble(13, 13), new CasillaNormal(13, 14)},
             {new CasillaPalabraTriple(14, 0), new CasillaNormal(14, 1), new CasillaNormal(14, 2), new CasillaLetraDoble(14, 3), new CasillaNormal(14, 4), new CasillaNormal(14, 5), new CasillaNormal(14, 6), new CasillaPalabraTriple(14, 7), new CasillaNormal(14, 8), new CasillaNormal(14, 9), new CasillaNormal(14, 10), new CasillaLetraDoble(14, 11), new CasillaNormal(14, 12), new CasillaNormal(14, 13), new CasillaPalabraTriple(14, 14)},
         };
+        this.observadores = new ArrayList<Observador>();
+    }
+
+    @Override
+    public void notificar() {
+        for (Observador observador : observadores) {
+            observador.actualizarTablero(this.casillas);
+        }
+    }
+
+    public void enlazarObservador(Observador o) {
+        observadores.add(o);
     }
 
     public Casilla[][] getCasillas() {
         return casillas;
     }
 
-    public void setCasillas(Casilla[][] casillas) {
-        this.casillas = casillas;
-    }
-
     public Boolean colocarFicha(Ficha ficha, Integer x, Integer y) {
         Ficha fichaAColocar = this.casillas[x][y].getFicha();
         if (fichaAColocar == null) {
             this.casillas[x][y].setFicha(ficha);
+            notificar();
             return true;
         } else {
             System.out.println("La casilla ya está ocupada");
@@ -46,6 +57,7 @@ public class Tablero {
         Ficha ficha = this.casillas[x][y].getFicha();
         if (ficha != null) {
             this.casillas[x][y].setFicha(null);
+            notificar();
         }
         return ficha;
     }
@@ -55,25 +67,32 @@ public class Tablero {
         return ficha;
     }
 
-    public void eliminarFicha(Integer fila, Integer columna) {
-        this.casillas[fila][columna].setFicha(null);
-    }
-
-    public void generarTablero() {
-        for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 15; j++) {
-                this.casillas[i][j].setFicha(null);
-            }
-        }
-    }
-
     public void setFichasFalse() {
-        for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 15; j++) {
+        for (Integer i = 0; i < 15; i++) {
+            for (Integer j = 0; j < 15; j++) {
                 if (this.casillas[i][j].getFicha() != null) {
                     this.casillas[i][j].getFicha().setEsTurnoActual(false);
                 }
             }
         }
+    }
+
+    public Casilla[][] getTablero() {
+        return this.casillas;
+    }
+
+    public ArrayList<Ficha> sacarFichasTurnoActual() {
+        ArrayList<Ficha> fichas = new ArrayList<Ficha>();
+        for (Integer i = 0; i < 15; i++) {
+            for (Integer j = 0; j < 15; j++) {
+                if (this.casillas[i][j].getFicha() != null) {
+                    if (this.casillas[i][j].getFicha().getEsTurnoActual()) {
+                        fichas.add(this.casillas[i][j].getFicha());
+                        this.casillas[i][j].setFicha(null);
+                    }
+                }
+            }
+        }
+        return fichas;
     }
 }

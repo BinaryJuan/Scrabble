@@ -33,7 +33,7 @@ public class Palabra {
     public String calcularPalabra(Tablero tablero) {
         String palabra = "";
         if (this.esHorizontal()) {
-            for (int i = this.comienzoX; i <= this.finX; i++) {
+            for (Integer i = this.comienzoX; i <= this.finX; i++) {
                 if (!tablero.getCasillas()[i][this.comienzoY].estaVacia()) {
                     palabra += tablero.getCasillas()[i][this.comienzoY].getFicha().getLetraSimbolo();
                 } else {
@@ -41,7 +41,7 @@ public class Palabra {
                 }
             }
         } else {
-            for (int i = this.comienzoY; i <= this.finY; i++) {
+            for (Integer i = this.comienzoY; i <= this.finY; i++) {
                 if (!tablero.getCasillas()[this.comienzoX][i].estaVacia()) {
                     palabra += tablero.getCasillas()[this.comienzoX][i].getFicha().getLetraSimbolo();
                 } else {
@@ -69,13 +69,13 @@ public class Palabra {
 
     public Boolean esLaPalabraMultiplicada(Tablero tablero) {
         if (this.esHorizontal()) {
-            for (int i = this.comienzoX; i <= this.finX; i++) {
+            for (Integer i = this.comienzoX; i <= this.finX; i++) {
                 if (tablero.getCasillas()[i][this.comienzoY].getColor() == Color.ROSA || tablero.getCasillas()[i][this.comienzoY].getColor() == Color.ROJO) {
                     return true;
                 }
             }
         } else {
-            for (int i = this.comienzoY; i <= this.finY; i++) {
+            for (Integer i = this.comienzoY; i <= this.finY; i++) {
                 if (tablero.getCasillas()[this.comienzoX][i].getColor() == Color.ROSA || tablero.getCasillas()[this.comienzoX][i].getColor() == Color.ROJO) {
                     return true;
                 }
@@ -86,13 +86,13 @@ public class Palabra {
 
     public Color colorPalabraMultiplicada(Tablero tablero) {
         if (this.esHorizontal()) {
-            for (int i = this.comienzoX; i <= this.finX; i++) {
+            for (Integer i = this.comienzoX; i <= this.finX; i++) {
                 if (tablero.getCasillas()[i][this.comienzoY].getColor() == Color.ROSA || tablero.getCasillas()[i][this.comienzoY].getColor() == Color.ROJO) {
                     return tablero.getCasillas()[i][this.comienzoY].getColor();
                 }
             }
         } else {
-            for (int i = this.comienzoY; i <= this.finY; i++) {
+            for (Integer i = this.comienzoY; i <= this.finY; i++) {
                 if (tablero.getCasillas()[this.comienzoX][i].getColor() == Color.ROSA || tablero.getCasillas()[this.comienzoX][i].getColor() == Color.ROJO) {
                     return tablero.getCasillas()[this.comienzoX][i].getColor();
                 }
@@ -105,7 +105,7 @@ public class Palabra {
         Integer puntajePalabra = 0;
         Boolean palabraValida = true;
         if (this.esHorizontal()) {
-            for (int i = this.comienzoX; i <= this.finX; i++) {
+            for (Integer i = this.comienzoX; i <= this.finX; i++) {
                 if (!tablero.getCasillas()[i][this.comienzoY].estaVacia()) {
                     puntajePalabra += this.devolverValorSegunCasilla(tablero.getCasillas()[i][this.comienzoY]);
                 } else {
@@ -113,7 +113,7 @@ public class Palabra {
                 }
             }
         } else {
-            for (int i = this.comienzoY; i <= this.finY; i++) {
+            for (Integer i = this.comienzoY; i <= this.finY; i++) {
                 if (!tablero.getCasillas()[this.comienzoX][i].estaVacia()) {
                     puntajePalabra += this.devolverValorSegunCasilla(tablero.getCasillas()[this.comienzoX][i]);
                 } else {

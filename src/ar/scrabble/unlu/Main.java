@@ -5,6 +5,6 @@ public class Main {
         Juego juego = new Juego();
         Vista vista = new Vista();
         Controlador controlador = new Controlador(juego, vista);
-        controlador.partida();
+        controlador.jugar();
     }
 }

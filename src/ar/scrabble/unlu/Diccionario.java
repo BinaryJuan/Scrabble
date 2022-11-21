@@ -16,7 +16,7 @@ public class Diccionario {
             this.palabras[0] = palabra;
         } else {
             String[] palabrasAux = new String[this.palabras.length + 1];
-            for (int i = 0; i < this.palabras.length; i++) {
+            for (Integer i = 0; i < this.palabras.length; i++) {
                 palabrasAux[i] = this.palabras[i];
             }
             palabrasAux[palabrasAux.length - 1] = palabra;
@@ -42,7 +42,7 @@ public class Diccionario {
     public boolean buscarPalabra(String palabra) {
         palabra = palabra.toLowerCase();
         boolean existe = false;
-        int i = 0;
+        Integer i = 0;
         while (!existe && i < this.palabras.length) {
             if (this.palabras[i].equals(palabra)) {
                 existe = true;
@@ -51,5 +51,4 @@ public class Diccionario {
         }
         return existe;
     }
-
 }

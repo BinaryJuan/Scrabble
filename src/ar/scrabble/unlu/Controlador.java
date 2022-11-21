@@ -1,4 +1,5 @@
 package ar.scrabble.unlu;
+import java.util.ArrayList;
 
 public class Controlador {
     Juego juego;
@@ -9,11 +10,11 @@ public class Controlador {
         this.vista = vista;
     }
 
-    public void partida() {
+    public void jugar() {
         vista.mostrarBienvenida();
         Boolean terminado = false;
         while (!terminado) {
-            int opcionElegida = vista.inputMenuPrincipal();
+            Integer opcionElegida = vista.inputMenuPrincipal();
             Boolean agregado = false;
             while (!agregado) {
                 if (juego.validarOpcionJugadorMenuPrincipal(opcionElegida)) {
@@ -25,11 +26,11 @@ public class Controlador {
             }
             switch (opcionElegida) {
                 case 1:
-                    Juego juego = new Juego();
+                    juego.getTablero().enlazarObservador(vista);
                     juego.generarMonton();
                     vista.notificacionCargandoDiccionario();
                     juego.cargarDiccionario();
-                    int cantidadJugadores = vista.inputCantidadJugadores();
+                    Integer cantidadJugadores = vista.inputCantidadJugadores();
                     agregado = false;
                     while (!agregado) {
                         if (juego.validarCantidadJugadores(cantidadJugadores)) {
@@ -39,12 +40,14 @@ public class Controlador {
                             cantidadJugadores = vista.inputCantidadJugadores();
                         }
                     }
-                    for (int i = 0; i < cantidadJugadores; i++) {
+                    for (Integer i = 0; i < cantidadJugadores; i++) {
                         agregado = false;
                         while (!agregado) {
                             String nombre = vista.inputNombreJugador(i + 1);
                             if (juego.validarNombreJugador(nombre)) {
-                                juego.agregarJugador(nombre);
+                                Jugador jugadorAgregado = juego.agregarJugador(nombre);
+                                jugadorAgregado.enlazarObservador(vista);
+                                jugadorAgregado.getAtril().enlazarObservador(vista);
                                 agregado = true;
                             } else {
                                 vista.mostrarNombreDeJugadorIncorrecto();
@@ -52,11 +55,11 @@ public class Controlador {
                             }
                         }
                     }
-                    juego.generarTablero();
                     vista.mostrarTablero(juego.getTablero().getCasillas());
                     vista.mostrarCantidadMonton(juego.getMonton().getFichas().size());
                     juego.generarPrimerTurno(juego.getMonton());
                     juego.setTurnoActual(juego.getPrimerTurno());
+                    juego.getMonton().enlazarObservador(vista);
                     while (juego.getMonton().getCantidad() > 0 && juego.quedanFichasAtriles() && !terminado) {
                         if (juego.limiteVecesConsecutivas()) {
                             vista.mostrarGameover();
@@ -67,7 +70,7 @@ public class Controlador {
                         if (!terminado) {
                             vista.mostrarTurno(juego.getTurnoActual().getNombre(), juego.getTurnoActual().getPuntaje());
                             vista.mostrarAtril(juego.getTurnoActual().getAtril());
-                            int opcionJugador = vista.inputMenuTurno(juego.getTurnoActual().getNombre());
+                            Integer opcionJugador = vista.inputMenuTurno(juego.getTurnoActual().getNombre());
                             agregado = false;
                             while (!agregado) {
                                 if (juego.validarOpcionJugador(opcionJugador)) {
@@ -82,8 +85,6 @@ public class Controlador {
                                     Ficha ficha = juego.getMonton().sacarFicha();
                                     vista.mostrarFichaSacada(ficha.getLetraSimbolo());
                                     juego.getTurnoActual().getAtril().agregarFicha(ficha);
-                                    vista.mostrarCantidadMonton(juego.getMonton().getFichas().size());
-                                    vista.mostrarAtril(juego.getTurnoActual().getAtril());
                                     juego.setTurnoActual(juego.siguienteTurno(juego.getTurnoActual()));
                                     break;
                                 case 2:
@@ -119,9 +120,7 @@ public class Controlador {
                                     } else {
                                         vista.mostrarFichaNoColocada();
                                     }
-                                    vista.mostrarTablero(juego.getTablero().getCasillas());
                                     vista.mostrarTurno(juego.getTurnoActual().getNombre(), juego.getTurnoActual().getPuntaje());
-                                    vista.mostrarAtril(juego.getTurnoActual().getAtril());
                                     break;
                                 case 3:
                                     vista.mostrarTablero(juego.getTablero().getCasillas());
@@ -140,16 +139,13 @@ public class Controlador {
                                     Ficha fichaInspeccionada = juego.getTablero().inspeccionarFicha(posicionSacarX, posicionSacarY);
                                     if (fichaInspeccionada != null && fichaInspeccionada.getEsTurnoActual()) {
                                         juego.getTablero().sacarFicha(posicionSacarX, posicionSacarY);
-                                        vista.mostrarTablero(juego.getTablero().getCasillas());
                                         juego.getTurnoActual().getAtril().agregarFicha(fichaInspeccionada);
                                         vista.notificacionAtrilActualizado();
-                                        vista.mostrarAtril(juego.getTurnoActual().getAtril());
                                     } else {
                                         vista.notificacionFichaInexistente();
                                     }
                                     break;
                                 case 4:
-                                    juego.getTurnoActual().getAtril().completarAtril(juego.getMonton());
                                     Integer opcionPalabra = vista.inputPalabraFormada();
                                     Boolean palabraValida = false;
                                     while (!palabraValida) {
@@ -188,19 +184,23 @@ public class Controlador {
                                             juego.setPuntajePalabra(palabraFormada, puntosPalabra);
                                             palabraFormada.setPuntaje(puntosPalabra);
                                             vista.mostrarPuntosPalabra(puntosPalabra);
-                                            juego.getTurnoActual().setPuntaje(palabraFormada.getPuntaje());
-                                            vista.mostrarpuntajeActualizado(juego.getTurnoActual().getNombre(), juego.getTurnoActual().getPuntaje());
-                                            juego.setTurnoActual(juego.siguienteTurno(juego.getTurnoActual()));
+                                            juego.getTurnoActual().agregarPuntaje(palabraFormada.getPuntaje());
                                             vista.mostrarTurnoTerminado();
                                             vista.mostrarCantidadMonton(juego.getMonton().getFichas().size());
                                         } else {
+                                            ArrayList<Ficha> fichas = juego.getTablero().sacarFichasTurnoActual();
+                                            juego.getTurnoActual().getAtril().devolverFichasTurnoActual(fichas);
                                             vista.mostrarPalabraInvalida();
                                         }
                                     } else {
+                                        ArrayList<Ficha> fichas = juego.getTablero().sacarFichasTurnoActual();
+                                        juego.getTurnoActual().getAtril().devolverFichasTurnoActual(fichas);
                                         juego.aumentarVecesConsecutivasSinTurno();
                                         vista.mostrarPalabraNoFormada();
                                     }
                                     juego.setFichasFalse();
+                                    juego.getTurnoActual().getAtril().completarAtril(juego.getMonton());
+                                    juego.setTurnoActual(juego.siguienteTurno(juego.getTurnoActual()));
                                     break;
                                 case 5:
                                     terminado = true;

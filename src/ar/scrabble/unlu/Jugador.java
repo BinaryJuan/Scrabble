@@ -1,15 +1,30 @@
 package ar.scrabble.unlu;
-public class Jugador {
+import java.util.ArrayList;
+
+public class Jugador implements Observable {
     private String nombre;
     private Integer puntaje;
     private Atril atril;
     private Ficha primerTurno;
+    private ArrayList<Observador> observadores;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.puntaje = 0;
         this.atril = new Atril(7);
         this.primerTurno = null;
+        this.observadores = new ArrayList<Observador>();
+    }
+
+    @Override
+    public void notificar() {
+        for (Observador observador : observadores) {
+            observador.actualizarPuntajeJugador(this.nombre, this.puntaje);
+        }
+    }
+
+    public void enlazarObservador(Observador o) {
+        observadores.add(o);
     }
 
     public String getNombre() {
@@ -32,10 +47,6 @@ public class Jugador {
         return puntaje;
     }
 
-    public void setPuntaje(Integer puntaje) {
-        this.puntaje += puntaje;
-    }
-
     public Atril getAtril() {
         return atril;
     }
@@ -46,6 +57,7 @@ public class Jugador {
 
     public void agregarPuntaje(Integer puntaje) {
         this.puntaje += puntaje;
+        notificar();
     }
 
     public void agregarFicha(Ficha ficha) {
@@ -54,10 +66,6 @@ public class Jugador {
 
     public void eliminarFicha(Ficha ficha) {
         this.atril.eliminarFicha(ficha);
-    }
-
-    public void mostrarPuntaje() {
-        System.out.println(this.puntaje);
     }
 
     public char tomarFichaTurno(Monton monton) {
@@ -73,6 +81,7 @@ public class Jugador {
             } else {
                 this.puntaje = 0;
             }
+            notificar();
         }
     }
 }
