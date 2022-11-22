@@ -139,7 +139,7 @@ public class Juego {
     }
 
     public Boolean limiteVecesConsecutivas() {
-        return this.vecesConsecutivasSinTurno == 2;
+        return this.vecesConsecutivasSinTurno == this.jugadores.size();
     }
 
     public void restarPuntajeFichasAtril() {

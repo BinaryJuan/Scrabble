@@ -378,7 +378,7 @@ public class Vista implements Observador {
     }
 
     public void mostrarVecesConsecutivasSinTurno() {
-        System.out.println("Se alcanzó el máximo de turnos consecutivos sin poder jugar (2)");
+        System.out.println("Se alcanzó el máximo de turnos consecutivos sin poder colocar fichas");
     }
 
     public void mostrarRestoDelPuntaje() {
