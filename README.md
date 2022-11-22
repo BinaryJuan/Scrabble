@@ -31,3 +31,6 @@ El objetivo del juego es obtener la mayor cantidad de puntos al formar palabras 
 ![](https://media.istockphoto.com/id/502558269/es/foto/letras-de-scrabble.jpg?s=612x612&w=0&k=20&c=GOwivnVneQm1epYLWneIFEFjojL2jqXm8p2Uu_doyLk=)
 
 ### UML
+##### Se recomienda aplicar Zoom sobre la imagen
+##### El archivo .jpg también se encuntra en el repositorio
+![](https://i.imgur.com/Syo1qSk.jpg)
