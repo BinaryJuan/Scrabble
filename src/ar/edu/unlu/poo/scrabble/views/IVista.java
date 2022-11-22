@@ -1,0 +1,52 @@
+package ar.edu.unlu.poo.scrabble.views;
+import java.util.ArrayList;
+
+import ar.edu.unlu.poo.scrabble.model.Atril;
+import ar.edu.unlu.poo.scrabble.model.Casilla;
+import ar.edu.unlu.poo.scrabble.model.Jugador;
+import ar.edu.unlu.poo.scrabble.model.Palabra;
+import ar.edu.unlu.poo.scrabble.model.Tablero;
+
+public interface IVista {
+	public Integer inputMenuPrincipal();
+    public Integer inputMenuTurno(String jugador);
+    public Integer inputCantidadJugadores();
+    public String inputNombreJugador(Integer numeroJugador);
+    public Integer inputPosicionAtril();
+    public Integer inputPosicionX();
+    public Integer inputPosicionY();
+    public Integer inputSacarPosicionX();
+    public Integer inputSacarPosicionY();
+    public Integer inputPalabraFormada();
+    public Integer inputPalabraPosicionInicialX();
+    public Integer inputPalabraPosicionInicialY();
+    public Integer inputPalabraPosicionFinalX();
+    public Integer inputPalabraPosicionFinalY();
+    public void mostrarTurno(String jugador, Integer puntaje);
+    public void mostrarCantidadDeJugadoresIncorrecta();
+    public void mostrarGameover();
+    public void mostrarNombreDeJugadorIncorrecto();
+    public void mostrarOpcionInvalida();
+    public void mostrarOpcionInvalidaAtril();
+    public void mostrarPosicionInvalida();
+    public void mostrarBienvenida();
+    public void mostrarFichaSacada(char letra);
+    public void mostrarTablero(Casilla[][] casillas);
+    public void mostrarCantidadMonton(Integer cantidad);
+    public void mostrarAtril(Atril atril);
+    public void mostrarFichaNoColocada();
+    public void mostrarGanador(ArrayList<Jugador> ganadores);
+    public void mostrarDondeEmpiezaYTerminaPalabra();
+    public void mostrarPalabraFormada(Tablero tablero, Palabra palabraFormada);
+    public void mostrarPuntosPalabra(Integer puntos);
+    public void mostrarpuntajeActualizado(String jugador, Integer puntaje);
+    public void mostrarPalabraNoFormada();
+    public void mostrarTurnoTerminado();
+    public void mostrarPalabraValida();
+    public void mostrarPalabraInvalida();
+    public void mostrarVecesConsecutivasSinTurno();
+    public void mostrarRestoDelPuntaje();
+    public void notificacionAtrilActualizado();
+    public void notificacionFichaInexistente();
+    public void notificacionCargandoDiccionario();
+}
