@@ -70,6 +70,7 @@ public class Controlador {
                             vista.mostrarGameover();
                             vista.mostrarVecesConsecutivasSinTurno();
                             juego.restarPuntajeFichasAtril();
+                            vista.mostrarRestoDelPuntaje();
                             vista.mostrarGanador(juego.calcularGanador());
                             terminado = true;
                         }
@@ -223,6 +224,8 @@ public class Controlador {
                     }
                     if (juego.getMonton().getCantidad() == 0) {
                         vista.mostrarGameover();
+                        juego.restarPuntajeFichasAtril();
+                        vista.mostrarRestoDelPuntaje();
                         vista.mostrarGanador(juego.calcularGanador());
                     }
                     break;
