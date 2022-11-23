@@ -1,6 +1,5 @@
 package ar.edu.unlu.poo.scrabble.controller;
 import java.util.ArrayList;
-
 import ar.edu.unlu.poo.scrabble.model.Ficha;
 import ar.edu.unlu.poo.scrabble.model.Juego;
 import ar.edu.unlu.poo.scrabble.model.Jugador;
@@ -70,6 +69,7 @@ public class Controlador {
                         if (juego.limiteVecesConsecutivas()) {
                             vista.mostrarGameover();
                             vista.mostrarVecesConsecutivasSinTurno();
+                            juego.restarPuntajeFichasAtril();
                             vista.mostrarGanador(juego.calcularGanador());
                             terminado = true;
                         }

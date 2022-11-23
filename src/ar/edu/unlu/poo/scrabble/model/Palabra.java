@@ -37,7 +37,7 @@ public class Palabra {
                 if (!tablero.getCasillas()[i][this.comienzoY].estaVacia()) {
                     palabra += tablero.getCasillas()[i][this.comienzoY].getFicha().getLetraSimbolo();
                 } else {
-                    palabra = "Palabra inválida o está vacía";
+                    palabra = "Palabra inválida o está vacía. Tal vez ingresó mal la posición. Intente en su siguiente turno";
                 }
             }
         } else {

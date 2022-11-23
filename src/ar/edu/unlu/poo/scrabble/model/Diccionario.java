@@ -41,7 +41,7 @@ public class Diccionario {
 
     public boolean buscarPalabra(String palabra) {
         palabra = palabra.toLowerCase();
-        boolean existe = false;
+        Boolean existe = false;
         Integer i = 0;
         while (!existe && i < this.palabras.length) {
             if (this.palabras[i].equals(palabra)) {
