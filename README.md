@@ -32,5 +32,5 @@ El objetivo del juego es obtener la mayor cantidad de puntos al formar palabras 
 
 ### UML
 ##### Se recomienda aplicar Zoom sobre la imagen
-##### El archivo .jpg también se encuntra en el repositorio
-![](https://i.imgur.com/Syo1qSk.jpg)
+![](https://i.imgur.com/47aUT3t.jpeg)
+[Link a archivo .html con UML](https://www.mediafire.com/file/wthwfeqcu19luwt/ScrabbleUML.html/file)
